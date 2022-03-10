@@ -1,0 +1,50 @@
+<div class="user-form">
+    <form class="user-form" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="form-control">
+            <div *ngIf="form.get('name')?.touched && form.get('name')?.invalid" class="validation">
+                <small *ngIf="form.get('name')?.hasError('required')">
+                    The field cannot be empty
+                </small>
+            </div>
+
+            <input type="text" formControlName="name" class="form-field" placeholder="Name">
+        </div>
+        <div class="form-control">
+
+            <div *ngIf="form.get('surname')?.touched && form.get('surname')?.invalid" class="validation">
+                <small *ngIf="form.get('surname')?.hasError('required')">
+                    The field cannot be empty
+                </small>
+            </div>
+            <input type="text" formControlName="surname" class="form-field" placeholder="Surname">
+        </div>
+        <div class="form-control">
+
+            <div *ngIf="form.get('birthday')?.touched && form.get('birthday')?.invalid" class="validation">
+                <small *ngIf="form.get('birthday')?.hasError('required')">
+                    The field cannot be empty
+                </small>
+            </div>
+            <input type="text" formControlName="birthday" class="form-field" placeholder="Date of birthday">
+        </div>
+        <div class="form-control">
+
+            <div *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid" class="validation">
+                <small *ngIf="form.get('phone')?.hasError('required')">
+                    The field cannot be empty
+                </small>
+            </div>
+            <input type="text" formControlName="phone" class="form-field" placeholder="Phone">
+        </div>
+        <div class="form-control">
+
+            <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="validation">
+                <small *ngIf="form.get('email')?.hasError('required')">
+                    The field cannot be empty
+                </small>
+            </div>
+            <input type="text" formControlName="email" class="form-field" placeholder="Email">
+        </div>
+        <button type="submit" class="btn" [disabled]="form.invalid">Submit</button>
+    </form>
+</div>
