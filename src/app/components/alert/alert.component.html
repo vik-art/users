@@ -1,1 +1,9 @@
-<p>alert works!</p>
+<div class="alert-container" *ngIf="text">
+    <div class="alert" [ngClass]="{
+        'alert-create': type === 'create',
+        'alert-update': type === 'update',
+        'alert-delete': type === 'delete'
+    }">
+        <p>{{text}}</p>
+    </div>
+</div>

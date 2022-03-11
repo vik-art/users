@@ -1,0 +1,29 @@
+.dashboard-container {
+  padding: 30px;
+  .dashboard-table {
+    width: 50%;
+    border: 1px dotted rgb(190, 189, 189);
+    tr,
+    th,
+    td {
+      border: 1px dotted rgb(190, 189, 189);
+      padding: 10px;
+    }
+  }
+}
+.btn {
+  display: inline-block;
+  border: none;
+  width: 100%;
+  padding: 15px 30px;
+  border-radius: 5px;
+}
+
+.edit-btn {
+  background-color: rgb(12, 187, 187);
+  margin-bottom: 5px;
+}
+
+.delete-btn {
+  background-color: rgb(240, 14, 14);
+}

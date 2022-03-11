@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/common/interface';
+import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,9 +11,11 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class FormComponent implements OnInit {
   form!: FormGroup;
+  users: Array<User> = []
 
   constructor(
-    private users: UserService
+    private userService: UserService,
+    private alert: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -49,8 +52,11 @@ export class FormComponent implements OnInit {
     if (this.form.invalid) {
       return;
     } else {
-      this.users.create(user).subscribe(() => {})
+      this.alert.create('The new user was added')
       this.form.reset()
-  }
+      return this.userService.create(user).subscribe((user) => {
+        this.users.push(user)
+      })
+    }
 }
 }

@@ -21,11 +21,11 @@ export class AlertComponent implements OnInit, OnDestroy {
     this.unSubscriber = this.alert.$alert.subscribe((alert) => {
       this.text = alert.text,
         this.type = alert.type
+      const timer = setTimeout(() => {
+        clearTimeout(timer);
+        this.text = ''
+      }, this.delay)
     })
-    const timer = setTimeout(() => {
-      clearTimeout(timer);
-      this.text = ''
-    }, this.delay)
   }
 
    ngOnDestroy(): void {
