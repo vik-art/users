@@ -33,10 +33,12 @@ export class FormComponent implements OnInit {
         Validators.maxLength(60)
       ]),
       birthday: new FormControl("", [
-        Validators.required
+        Validators.required,
+        Validators.pattern("(^(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9]{2}$)")
       ]),
       phone: new FormControl("", [
-        Validators.required
+        Validators.required,
+        Validators.pattern("(^[0-9]{3}[-\s\.]?[0-9]{3}[0-9]{4,6}$)")
       ]),
       email: new FormControl("", [
         Validators.required,

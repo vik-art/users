@@ -33,9 +33,29 @@
 <div class="edit-window" *ngIf="showEditWindow">
     <form [formGroup]="form" (ngSubmit)="save()">
         <div class="form-control">
+            <div *ngIf="form.get('name')?.touched && form.get('name')?.invalid" class="validation">
+                <small *ngIf="form.get('name')?.hasError('required')">
+                    The field cannot be empty
+                </small>
+            </div>
+            <div class="validation" *ngIf="form.get('name')?.hasError('maxlength')">
+                <small>
+                    The length of field cannot be more than 60 symbols
+                </small>
+            </div>
             <input type="text" formControlName="name" placeholder="Name">
         </div>
         <div class="form-control">
+            <div *ngIf="form.get('name')?.touched && form.get('surname')?.invalid" class="validation">
+                <small *ngIf="form.get('name')?.hasError('required')">
+                    The field cannot be empty
+                </small>
+            </div>
+            <div class="validation" *ngIf="form.get('surname')?.hasError('maxlength')">
+                <small>
+                    The length of field cannot be more than 60 symbols
+                </small>
+            </div>
             <input type="text" formControlName="surname" placeholder="Surname">
         </div>
         <div class="form-control">

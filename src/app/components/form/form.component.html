@@ -6,6 +6,11 @@
                     The field cannot be empty
                 </small>
             </div>
+            <div class="validation" *ngIf="form.get('name')?.hasError('maxlength')">
+                <small>
+                    The length of field cannot be more than 60 symbols
+                </small>
+            </div>
 
             <input type="text" formControlName="name" class="form-field" placeholder="Name">
         </div>
@@ -14,6 +19,11 @@
             <div *ngIf="form.get('surname')?.touched && form.get('surname')?.invalid" class="validation">
                 <small *ngIf="form.get('surname')?.hasError('required')">
                     The field cannot be empty
+                </small>
+            </div>
+            <div class="validation" *ngIf="form.get('surname')?.hasError('maxlength')">
+                <small>
+                    The length of field cannot be more than 60 symbols
                 </small>
             </div>
             <input type="text" formControlName="surname" class="form-field" placeholder="Surname">
@@ -25,7 +35,13 @@
                     The field cannot be empty
                 </small>
             </div>
-            <input type="text" formControlName="birthday" class="form-field" placeholder="Date of birthday">
+            <div class="validation" *ngIf="form.get('birthday')?.hasError('pattern')">
+                <small>
+                    Please, enter the correct form of date
+                </small>
+            </div>
+            <input type="text" formControlName="birthday" class="form-field"
+                placeholder="Date of birthday (dd.mm.yyyy)">
         </div>
         <div class="form-control">
 
@@ -34,13 +50,23 @@
                     The field cannot be empty
                 </small>
             </div>
-            <input type="text" formControlName="phone" class="form-field" placeholder="Phone">
+            <div class="validation" *ngIf="form.get('phone')?.hasError('pattern')">
+                <small>
+                    Please, enter the correct form of phone number
+                </small>
+            </div>
+            <input type="text" formControlName="phone" class="form-field" placeholder="Phone (0xxyyyyyyy)">
         </div>
         <div class="form-control">
 
             <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="validation">
                 <small *ngIf="form.get('email')?.hasError('required')">
                     The field cannot be empty
+                </small>
+            </div>
+            <div class="validation" *ngIf="form.get('email')?.hasError('email')">
+                <small>
+                    Please, enter the correct form of email
                 </small>
             </div>
             <input type="text" formControlName="email" class="form-field" placeholder="Email">

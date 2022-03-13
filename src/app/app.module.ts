@@ -7,15 +7,13 @@ import { AppComponent } from './app.component';
 import { FormComponent } from './components/form/form.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { EditPageComponent } from './components/edit-page/edit-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
     AlertComponent,
-    DashboardComponent,
-    EditPageComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -56,8 +56,8 @@ this.unSubscriber = this.userService.getAll().subscribe((users) => {
     this.id = id;
     this.showEditWindow = true;
     this.form = new FormGroup({
-      name: new FormControl(user.name, [Validators.required]),
-      surname: new FormControl(user.surname, [Validators.required]),
+      name: new FormControl(user.name, [Validators.required, Validators.maxLength(60)]),
+      surname: new FormControl(user.surname, [Validators.required, Validators.maxLength(60)]),
       birthday: new FormControl(user.birthday, [Validators.required]),
       phone: new FormControl(user.phone, [Validators.required]),
       email: new FormControl(user.email, [Validators.required, Validators.email])
@@ -71,6 +71,7 @@ this.unSubscriber = this.userService.getAll().subscribe((users) => {
       date: new Date()
     }).subscribe(() => {
       this.alertService.update("User data has been updated")
+      this.getUsers()
     })
     this.showEditWindow = false;
   }
