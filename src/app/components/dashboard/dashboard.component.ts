@@ -58,8 +58,8 @@ this.unSubscriber = this.userService.getAll().subscribe((users) => {
     this.form = new FormGroup({
       name: new FormControl(user.name, [Validators.required, Validators.maxLength(60)]),
       surname: new FormControl(user.surname, [Validators.required, Validators.maxLength(60)]),
-      birthday: new FormControl(user.birthday, [Validators.required]),
-      phone: new FormControl(user.phone, [Validators.required]),
+      birthday: new FormControl(user.birthday, [Validators.required,  Validators.pattern("(^(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9]{2}$)")]),
+      phone: new FormControl(user.phone, [Validators.required, Validators.pattern("(^[0-9]{3}[-\s\.]?[0-9]{3}[0-9]{4,6}$)")]),
       email: new FormControl(user.email, [Validators.required, Validators.email])
     })
   }
