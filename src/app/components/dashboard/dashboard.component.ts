@@ -1,5 +1,4 @@
-import { CurrencyPipe } from '@angular/common';
-import { Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, DoCheck, Input, OnDestroy, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/common/interface';
@@ -13,7 +12,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   unSubscriber!: Subscription;
-  removeUnsubscriber!: Subscription;
+  removeSubsciption!: Subscription;
+  removeEditSubscription!: Subscription;
   showEditWindow: boolean = false;
   form!: FormGroup;
   id!: string;
@@ -27,9 +27,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   this.getUsers()
   }
+
   ngOnDestroy(): void {
     this.unSubscriber.unsubscribe();
-    this.removeUnsubscriber.unsubscribe();
+    this.removeSubsciption.unsubscribe();
+    this.removeEditSubscription.unsubscribe();
   }
 
   getUsers() {
@@ -43,7 +45,7 @@ this.unSubscriber = this.userService.getAll().subscribe((users) => {
   }
 
   removeItem(id: string) {
- this.removeUnsubscriber = this.userService.remove(id).subscribe(() => {
+ this.removeSubsciption = this.userService.remove(id).subscribe(() => {
    this.alertService.delete("The user data has been removed")
    this.users = this.users.filter(user => user.id !== id);
   })
@@ -63,11 +65,12 @@ this.unSubscriber = this.userService.getAll().subscribe((users) => {
   }
 
   save() {
-    this.userService.updateItem({
+   this.removeEditSubscription = this.userService.updateItem({
       ...this.form.value,
       id: this.id,
       date: new Date()
     }).subscribe(() => {
+      this.alertService.update("User data has been updated")
     })
     this.showEditWindow = false;
   }
