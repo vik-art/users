@@ -54,11 +54,11 @@ export class UserService {
         }))
     }
 
-  remove(id: string) {
+  remove(id: string): Observable<void> {
        return this.http.delete<void>(`${environment.databaseURL}/users/${id}.json`)
     }
 
-  updateItem(user: User) {
+  updateItem(user: User): Observable<User> {
     return this.http.patch<User>(`${environment.databaseURL}/users/${user.id}.json`, user)
   }
 }

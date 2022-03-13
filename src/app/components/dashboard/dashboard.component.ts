@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/common/interface';
@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   removeUnsubscriber!: Subscription;
   showEditWindow: boolean = false;
   form!: FormGroup;
+  id!: string;
   @Input() users!: Array<User>;
 
   constructor(
@@ -24,17 +25,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.unSubscriber = this.userService.getAll().subscribe((users) => {
+  this.getUsers()
+  }
+  ngOnDestroy(): void {
+    this.unSubscriber.unsubscribe();
+    this.removeUnsubscriber.unsubscribe();
+  }
+
+  getUsers() {
+this.unSubscriber = this.userService.getAll().subscribe((users) => {
       if (users) {
       this.users = users;
       } else {
         return;
       }
     })
-  }
-  ngOnDestroy(): void {
-    this.unSubscriber.unsubscribe();
-    this.removeUnsubscriber.unsubscribe();
   }
 
   removeItem(id: string) {
@@ -46,6 +51,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   editItem(id: string) {
     let [user] = this.users.filter(user => user.id === id);
+    this.id = id;
     this.showEditWindow = true;
     this.form = new FormGroup({
       name: new FormControl(user.name, [Validators.required]),
@@ -57,7 +63,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    
+    this.userService.updateItem({
+      ...this.form.value,
+      id: this.id,
+      date: new Date()
+    }).subscribe(() => {
+    })
     this.showEditWindow = false;
   }
 }
