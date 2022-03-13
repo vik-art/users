@@ -43,6 +43,17 @@ export class UserService {
     )
   }
 
+ getById(id: string): Observable<any> {
+        return this.http.get(`${environment.databaseURL}/users/${id}.json`)
+        .pipe(map(user => {
+                return {
+                    ...user,
+                    id,
+                    date: new Date()
+                }
+        }))
+    }
+
   remove(id: string) {
        return this.http.delete<void>(`${environment.databaseURL}/users/${id}.json`)
     }

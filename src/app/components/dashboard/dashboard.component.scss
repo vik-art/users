@@ -27,3 +27,24 @@
 .delete-btn {
   background-color: rgb(240, 14, 14);
 }
+
+.edit-window {
+  padding: 40px 30px;
+  max-width: 480px;
+  width: 100%;
+  background-color: rgb(226, 220, 220);
+  border: 1px dotted rgb(112, 106, 106);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .form-control {
+    margin-bottom: 20px;
+    input {
+      width: 100%;
+      padding: 10px 20px;
+      border: 1px dotted rgb(112, 106, 106);
+      border: 5px;
+    }
+  }
+}

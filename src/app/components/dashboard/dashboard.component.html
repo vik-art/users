@@ -22,10 +22,31 @@
                 <td>{{user.email}}</td>
                 <td>{{user.date | date}}</td>
                 <td>
-                    <button class="btn edit-btn">Edit</button>
+                    <button class="btn edit-btn" (click)="editItem(user.id!)">Edit</button>
                     <button class="btn delete-btn" (click)="removeItem(user.id!)">Detele</button>
                 </td>
             </tr>
         </tbody>
     </table>
+</div>
+
+<div class="edit-window" *ngIf="showEditWindow">
+    <form [formGroup]="form" (ngSubmit)="save()">
+        <div class="form-control">
+            <input type="text" formControlName="name" placeholder="Name">
+        </div>
+        <div class="form-control">
+            <input type="text" formControlName="surname" placeholder="Surname">
+        </div>
+        <div class="form-control">
+            <input type="text" formControlName="birthday" placeholder="Birthday">
+        </div>
+        <div class="form-control">
+            <input type="text" formControlName="phone" placeholder="Phone">
+        </div>
+        <div class="form-control">
+            <input type="text" formControlName="email" placeholder="Email">
+        </div>
+        <button type="submit" class="btn edit-btn">Save</button>
+    </form>
 </div>
