@@ -54,11 +54,11 @@ export class FormComponent implements OnInit {
     if (this.form.invalid) {
       return;
     } else {
+      this.userService.create(user).subscribe((user) => {
+        this.users.push(user);
+      })
       this.alert.create('The new user was added')
       this.form.reset()
-      return this.userService.create(user).subscribe((user) => {
-        this.users.push(user)
-      })
     }
 }
 }
